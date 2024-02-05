@@ -1,7 +1,7 @@
+import {GestureResponderEvent, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {Canvas, Circle, Fill} from '@shopify/react-native-skia';
 import {useSharedValue} from 'react-native-reanimated';
-import {GestureResponderEvent} from 'react-native';
 
 const App = () => {
   const circleLocationX = useSharedValue(200);
@@ -13,27 +13,29 @@ const App = () => {
     circleLocationX.value = locationX;
     circleLocationY.value = locationY;
   };
-
   return (
-    <>
+    <View
+      style={{
+        flex: 1,
+      }}>
       <Canvas
         style={{
           flex: 1,
           width: '100%',
           height: 'auto',
         }}
-        onTouchStart={e => {
+        onTouchStart={event => {
           console.log('onTouchStart');
-          handleMoveEvent(e);
+          handleMoveEvent(event);
         }}
         onTouchMove={handleMoveEvent}
-        onTouchEnd={e => {
+        onTouchEnd={() => {
           console.log('onTouchEnd');
         }}>
         <Fill color="#120a3d" />
         <Circle cx={circleLocationX} cy={circleLocationY} r={100} color="red" />
       </Canvas>
-    </>
+    </View>
   );
 };
 
